@@ -2,14 +2,14 @@
 SRC_DIR := src
 OBJ_DIR := obj
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -I./lib/libft/include
 LIBFT_DEPENDENCY := libft.a
 LIBFT_DIR:=lib/libft
 
 # Server setup
 SERVER_NAME := server
 SERVER_DIR := server_dir
-SERVER_SRC := $(SERVER_DIR)/$(SRC_DIR)/main.c
+SERVER_SRC := $(SERVER_DIR)/$(SRC_DIR)/server.c
 SERVER_OBJ := $(SERVER_SRC:$(SERVER_DIR)/$(SRC_DIR)/%.c=$(SERVER_DIR)/$(OBJ_DIR)/%.o)
 
 # Client setup
