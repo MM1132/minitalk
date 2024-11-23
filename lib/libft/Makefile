@@ -1,7 +1,8 @@
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror -Iinclude
 NAME=libft.a
 OBJ_DIR=obj
+
 MAIN_FILES=\
 	ft_isalpha.c \
 	ft_isdigit.c \
@@ -37,6 +38,17 @@ MAIN_FILES=\
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
 	ft_putnbr_fd.c \
+	ft_printf/ft_printf.c \
+	ft_printf/get_format_specifier.c \
+	ft_printf/put_hex.c \
+	ft_printf/put_nbr_base.c \
+	ft_printf/utils.c \
+	ft_printf/print_functions/print_character_format.c \
+	ft_printf/print_functions/print_hex_format.c \
+	ft_printf/print_functions/print_nbr_format.c \
+	ft_printf/print_functions/print_pointer_format.c \
+	ft_printf/print_functions/print_string_format.c \
+	ft_printf/print_functions/print_unsigned_format.c
 
 BONUS_FILES=\
 	ft_lstnew.c \
@@ -47,11 +59,10 @@ BONUS_FILES=\
 	ft_lstdelone.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
-	ft_lstmap.c \
+	ft_lstmap.c
 
 # We create the list of .o files based on the list of .c files
 MAIN_OBJ_FILES=$(MAIN_FILES:%.c=$(OBJ_DIR)/%.o)
-
 BONUS_OBJ_FILES=$(BONUS_FILES:%.c=$(OBJ_DIR)/%.o)
 
 # The compiled program depends on all the .o files
@@ -59,8 +70,16 @@ $(NAME): $(MAIN_OBJ_FILES)
 	ar rcs $(NAME) $(MAIN_OBJ_FILES)
 
 $(OBJ_DIR)/%.o: %.c
-	mkdir -p $(OBJ_DIR)
+	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/ft_printf/%.o: ft_printf/%.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c -I. $< -o $@
+
+$(OBJ_DIR)/ft_printf/print_functions/%.o: ft_printf/print_functions/%.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c -I./ft_printf $< -o $@
 
 # Compile the BONUS part of the library
 bonus: $(BONUS_OBJ_FILES)
