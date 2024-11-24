@@ -3,8 +3,8 @@ SRC_DIR := src
 OBJ_DIR := obj
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -I./lib/libft/include
-LIBFT_DEPENDENCY := libft.a
-LIBFT_DIR:=lib/libft
+LIBFT_DIR := lib/libft
+LIBFT_DEPENDENCY := $(LIBFT_DIR)/libft.a
 
 # Server setup
 SERVER_NAME := server
